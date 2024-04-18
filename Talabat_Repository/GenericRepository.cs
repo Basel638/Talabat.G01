@@ -43,7 +43,7 @@ namespace Talabat_Repository
 		}
 
 	
-
+		 
 		public async Task<T?> GetWithSpecAsync(ISpecifications<T> spec)
 		{
 			return await ApplySpecifications(spec).FirstOrDefaultAsync();
