@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.APIs", "Talabat.APIs\Talabat.APIs.csproj", "{1B4B6FBB-1E26-4FAD-8C80-EC87E4B7FA70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat_Core", "Talabat_Core\Talabat_Core.csproj", "{18469712-6CFB-4D75-90B2-A88AF8FD2417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat_Core", "Talabat_Core\Talabat_Core.csproj", "{18469712-6CFB-4D75-90B2-A88AF8FD2417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat_Repository", "Talabat_Repository\Talabat_Repository.csproj", "{6B2A3308-7E61-482A-B352-F6C5D8063196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat_Infrastructure", "Talabat_Repository\Talabat_Infrastructure.csproj", "{6B2A3308-7E61-482A-B352-F6C5D8063196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat_Service", "Talabat_Service\Talabat_Service.csproj", "{7E90AE13-9A32-4AC2-BFE0-3875639D96D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat_Service", "Talabat_Service\Talabat_Service.csproj", "{7E90AE13-9A32-4AC2-BFE0-3875639D96D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
