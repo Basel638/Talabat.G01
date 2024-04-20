@@ -17,6 +17,8 @@ namespace Talabat_Core.Specifications
 
 
 
+        public Expression<Func<T,object>> OrderBy { get; set; }
+        public Expression<Func<T,object>> OrderByDesc { get; set; }
 
     }
 }
