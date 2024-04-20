@@ -14,12 +14,16 @@ namespace Talabat.APIs.Controllers
 	public class ProductController : BaseApiController
 	{
 		private readonly IGenericRepository<Product> _productRepo;
+		private readonly IGenericRepository<ProductBrand> _brandsRepo;
 		private readonly IMapper _mapper;
+		private readonly IGenericRepository<ProductCategory> _categoriesRepo;
 
-		public ProductController(IGenericRepository<Product> productRepo, IMapper mapper)
+		public ProductController(IGenericRepository<Product> productRepo,IGenericRepository<ProductBrand>brandsRepo, IMapper mapper,IGenericRepository<ProductCategory> categoriesRepo)
 		{
 			_productRepo = productRepo;
+			_brandsRepo = brandsRepo;
 			_mapper = mapper;
+			_categoriesRepo = categoriesRepo;
 		}
 
 
@@ -50,6 +54,23 @@ namespace Talabat.APIs.Controllers
 				return NotFound(new ApiResponse(404)); // 404
 
 			return Ok(_mapper.Map<Product, ProductToReturnDto>(product)); // 200
+		}
+
+
+		[HttpGet("brands")]//GET: /api/products/brands
+		public async Task<ActionResult<IEnumerable<ProductBrand>>> GetBrands()
+		{
+			var brands = await _brandsRepo.GetAllAsync();
+			return Ok(brands);
+
+		}
+
+		[HttpGet("categories")] //GET: /api/products/categories
+
+		public async Task<ActionResult<IEnumerable<ProductCategory>>>GetCategories()
+		{
+			var categories = await _categoriesRepo.GetAllAsync();
+			return Ok(categories);
 		}
 
 	}
