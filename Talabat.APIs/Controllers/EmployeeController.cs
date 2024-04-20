@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Talabat.APIs.Errors;
 using Talabat_Core.Entities;
 using Talabat_Core.Repositories.Contract;
 using Talabat_Core.Specifications.EmployeeSpecs;
@@ -35,7 +36,7 @@ namespace Talabat.APIs.Controllers
 
 			var employee = await _employeesRepo.GetWithSpecAsync(spec);
 			if(employee is null) 
-				return NotFound();
+				return NotFound(new ApiResponse(404));
 
 			return Ok(employee);
 
