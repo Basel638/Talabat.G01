@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 using Talabat.APIs.Errors;
@@ -6,20 +7,21 @@ using Talabat.APIs.Errors;
 namespace Talabat.APIs.Middlewares
 {
 	// By Convension
-	public class ExceptionMiddleware
+	public class ExceptionMiddleware : IMiddleware
 	{
-		private readonly RequestDelegate _next;
+		//private readonly RequestDelegate _next;
 		private readonly ILogger<ExceptionMiddleware> _logger;
 		private readonly IWebHostEnvironment _env;
 
-		public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> loggerFactory, IWebHostEnvironment env)
+		public ExceptionMiddleware( ILogger<ExceptionMiddleware> loggerFactory, IWebHostEnvironment env)
 		{
-			_next = next;
 			_logger = loggerFactory;
 			_env = env;
 		}
 
-		public async Task InvokeAsync(HttpContext httpContext)
+		
+
+		public async Task InvokeAsync(HttpContext httpContext, RequestDelegate _next)
 		{
 			try
 			{
@@ -34,7 +36,7 @@ namespace Talabat.APIs.Middlewares
 				_logger.LogError(ex.Message); //Development
 											  // Log Exception in (Database | Files) // Production Env
 
-				httpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+				httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 				httpContext.Response.ContentType = "application/json";
 
 				var response = _env.IsDevelopment() ?
@@ -45,12 +47,19 @@ namespace Talabat.APIs.Middlewares
 
 				var options = new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
-				var json = JsonSerializer.Serialize(response,options);
+				var json = JsonSerializer.Serialize(response, options);
 
 				await httpContext.Response.WriteAsync(json);
 
 			}
 		}
+
+
+
+
+
+
+
 
 	}
 }
