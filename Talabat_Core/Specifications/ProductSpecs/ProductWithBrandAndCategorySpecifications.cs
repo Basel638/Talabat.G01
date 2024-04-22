@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;   
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +11,20 @@ namespace Talabat_Core.Specifications.ProductSpecs
 	{
 		// This Constructor will be Used for Creating an Object, That will be Used to Get all Products
 
-		public ProductWithBrandAndCategorySpecifications(string sort,int? brandId, int? categoryId)
+		public ProductWithBrandAndCategorySpecifications(ProductSpecParams specParams)
 		   : base(P =>
 		   
-					(!brandId.HasValue|| P.BrandId==brandId.Value)&& 
-					(!categoryId.HasValue || P.CategoryId==categoryId.Value)  
+					(!specParams.BrandId.HasValue|| P.BrandId== specParams.BrandId.Value)&& 
+					(!specParams.CategoryId.HasValue ||P.CategoryId == specParams.CategoryId.Value)  
 		   
 		   
 		   )
 		{
 			AddIncludes();
 
-			if (!string.IsNullOrEmpty(sort))
+			if (!string.IsNullOrEmpty(specParams.Sort))
 			{
-				switch (sort)
+				switch (specParams.Sort)
 				{
 					case "priceAsc":
 						//OrderBy = P => P.Price;
@@ -45,6 +45,8 @@ namespace Talabat_Core.Specifications.ProductSpecs
 			else
 				AddOrderBy(P => P.Name);
 
+
+			ApplyPagination((specParams.PageIndex-1)*specParams.PageSize,specParams.PageSize);
 		}
 
 

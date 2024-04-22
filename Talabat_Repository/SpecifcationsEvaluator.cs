@@ -25,11 +25,15 @@ namespace Talabat_Infrastructure
 			else if (spec.OrderByDesc is not null)
 				query = query.OrderByDescending(spec.OrderByDesc);
 
+
+			if (spec.IsPaginationEnabled)
+				query = query.Skip(spec.Skip).Take(spec.Take);
+
 			// query = _dbcontext.set<TEntity>().where(E => E.Id == 1)
 			// include expressions
 			// 1. P => P.Brand
 			// 2. P => P.Category
-
+			 
 
 
 			query = spec.Includes.Aggregate(query, (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
@@ -41,7 +45,7 @@ namespace Talabat_Infrastructure
 
 			return query;
 		}
-
+		
 
 	}
 
