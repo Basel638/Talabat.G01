@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Helpers;
 using Talabat_Core.Repositories.Contract;
+using Talabat_Infrastructure;
 using Talabat_Repository;
 namespace Talabat.APIs.Extensions
 {
@@ -10,6 +11,7 @@ namespace Talabat.APIs.Extensions
 
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
+			services.AddScoped(typeof(IBasketRepository), typeof(Basketrepository));
 			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 			services.AddAutoMapper(typeof(MappingProfiles));
 			services.Configure<ApiBehaviorOptions>(options =>
